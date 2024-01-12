@@ -1,0 +1,33 @@
+{% extends 'core/base.html' %}
+
+{% block title%} contact {% endblock %}
+
+{% block content%} 
+<div class="container " style="height: 100vh;">
+    <div class="root">
+        {% for conversation in conversations%}
+        <a href="{% url 'conversation:detail' conversation.id %}">
+        <div class="text-white bg-secondary ">
+            
+                <div class="d-inline mb-2">
+                    <img src="{{conversation.item.image.url}}" alt="" srcset="" style="width: 50px;" class="d-inline">
+                </div>
+                <div class="d-inline">
+                    {% for member in conversation.members.all %}
+                        {% if member != request.user %}
+                            <span class="">{{member}} | {{conversation.modefied_at}} |</span> 
+                            <p class="d-inline"> name: {{conversation.item.name}}</p>
+                        {% endif %}
+
+                    {% endfor %}
+                </div>
+                <div class="bg-light">
+                    <hr>
+
+                </div>
+            {% endfor %}
+        </div>
+    </a>
+    </div>
+</div>
+{% endblock %}

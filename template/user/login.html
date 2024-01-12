@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% block title %} signup {% endblock %}
+
+{% block content %}
+
+<div class="container my-auto w-50 " >
+    <div class="root">
+        <p class="text-center h2 mt-5">Signup </p>
+        <div style="  background-color: rgb(249, 234, 234);" class="my-4 mx-auto px-5 py-5 rounded shadow  ">
+            <form action="" method="post" class="">
+                {% csrf_token %} 
+                <div class="mb-3">
+                    <label for="">Username :</label>
+                    {{form.username}}
+                </div>
+                
+                
+                <div class="mb-3">
+                    <label for="">Password</label>
+                    {{form.password}}
+                </div>
+                
+                <div class="mx-5 class="mb-3"">
+                    <button type="submit" class="btn-primary mx-2 ">Submit</button>
+                </div>
+
+                {% if form.errors or form.non_field_errors %}
+                    <div class="">
+                        {% for field in form%}
+                            <p>{{field.errors}}</p>
+                        {% endfor %}
+                        {{form.non_field_errors}}
+                    </div>
+
+                {% endif %}
+        </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,117 @@
+
+{% extends 'core/base.html' %}
+
+{% block title %} shopio {% endblock%}
+
+{% include 'core/category.html' %}
+{% block content %}
+<main class="">
+    <div class="container5">
+        <!--Grid row-->
+        <div class="row">
+            <!--Grid column-->
+            <div class="col-md-6 mb-4 mt-5">
+                <img src="{{item_instance.image.url}}" class="img-fluid" alt="hi" />
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-6 mb-4">
+                <!--Content-->
+                <div class="p-4">
+                    <div class="mb-3 h4">
+                        <p>{{item_instance.name}}</p>
+                    </div>
+
+                    <p class="lead">
+                        
+                        <span>${{item_instance.price}}</span>
+                    </p>
+
+                    <strong><p style="font-size: 20px;">Description</p></strong>
+
+                    <p>{{item_instance.description}}</p>
+
+                    <form class="d-flex justify-content-left">
+                        <!-- Default input -->
+                        {% if request.user == item_instance.created_by %}
+                        <div class="p-4" style="background-color: rgb(214, 232, 248);">
+                        <p class="h6">This is your Item</p>
+                        <a href="{% url 'Item:edit' item_instance.id %}" class="btn btn-danger ms-1 py-2 px-4 mt-3">Edit</a>
+                        <a href="{% url 'Item:delete' item_instance.id %}" class="btn btn-danger ms-1 py-2 px-4 mt-3">Delete</a>
+                        {% else %}
+
+                        </div>
+                        
+                        <a href="{% url 'conversation:new' item_instance.id %}" class="btn btn-success ms-1 py-2 px-4 mt-3">Contact Seller</a>
+                        {% endif %}
+                    </form>
+                </div>
+                <!--Content-->
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+
+        <hr>
+
+        <!--Grid row-->
+        <div class="row d-flex justify-content-center mt-5">
+            <!--Grid column-->
+            <div class="col-md-6 text-center">
+                <h4 class="my-4 h4">Additional information</h4>
+
+                <p>Seller : {{item_instance.created_by}}</p>
+                <p>location:{{item_instance.location}}</p>
+                <p>Year of purchase : {{item_instance.year}}</p>
+            </div>
+            <!--Grid column-->
+        </div>
+        <!--Grid row-->
+
+        <!--Grid row-->
+        <hr />
+        <h4 class="my-4 h4 text-center">related Items</h4>
+        <section>
+            <div class=" mt-3">
+              <div class="row">
+            {% for item in related_items %}
+                <div class="col-lg-3 col-md-6 mb-4 ">
+                    <a href="{% url 'Item:details' item.id%}">
+                    <div class="card">
+                        <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light" data-mdb-ripple-color="light">
+                        <img src="{{item.image.url}}" class="w-100" />
+                        <a href="#!">
+                            <div class="mask">
+                            <div class="d-flex justify-content-start align-items-end h-100">
+                                <h5><span class="badge bg-dark ms-2">NEW</span></h5>
+                            </div>
+                            </div>
+                            <div class="hover-overlay">
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                            </div>
+                        </a>
+                        </div>
+                        <div class="card-body">
+                        <a href="" class="text-reset">
+                            <h5 class="card-title mb-2">{{item.name}}</h5>
+                        </a>
+                        <a href="" class="text-reset ">
+                            <p>{{item.year}} model</p>
+                        </a>
+                        <h6 class="mb-3 price">{{item.price}}$</h6>
+                        </div>
+                    </div>
+                </a>
+                </div>
+            {% endfor %}  
+              </div>
+        
+              
+            </div>
+          </section>>
+        <!--Grid row-->
+    </div>
+</main>
+
+{% endblock%}

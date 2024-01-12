@@ -1,0 +1,19 @@
+
+<div class="mx-5">
+    <ul class="nav text-ligh" style="background-color: #607D8B;">
+        <li class="nav-item">
+          <a class="nav-link active text-light" href="/">Category</a>
+        </li>
+        {%for category in categories %}
+            <div class="{% if category.id == category_id %}bg-light {%endif%}">
+              <li class="nav-item ">
+                <a class="nav-link {% if category.id == category_id %}text-dark {%else%}text-light{%endif%}" href="{% url 'Item:items'%}?query={{query}}&category={{category.id}} ">{{category.name}}</a>
+              </li>
+
+            </div>
+            
+            
+        {% endfor %}
+        
+</div>
+

@@ -1,0 +1,31 @@
+{% extends 'core/base.html' %}
+
+{% block title%} contact {% endblock %}
+
+{% block content%} 
+<div class="container my-auto " style="height: 100vh;">
+    <div class="root">
+        
+        
+        <div  class="my-4 mx-auto  rounded  ">
+            <form action="" method="post" class="" >
+                {% csrf_token %} 
+                {{form.as_p}}
+                <div class="mb-3 mt-5 ml-5">
+                    <button type="submit" class="btn-primary mx-2 px-5 py-2">Send</button>
+                </div>
+
+                {% if form.errors or form.non_field_errors %}
+                    <div class="">
+                        {% for field in form%}
+                            <p>{{field.errors}}</p>
+                        {% endfor %}
+                        {{form.non_field_errors}}
+                    </div>
+
+                {% endif %}
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
